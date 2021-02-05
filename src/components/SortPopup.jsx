@@ -9,7 +9,6 @@ const SortPopup = ({items}) => {
         setVisiblePopup(!visiblePopup)
     };
     const handleOutsideClick = (e) => {
-        console.log(e.pa)
         if(!e.path.includes(sortRef.current)){
             setVisiblePopup(false);
         }
