@@ -6,8 +6,6 @@ import store from './redux/store.js'
 import './scss/app.scss';
 import {Provider} from "react-redux";
 
-console.log(store);
-
 ReactDOM.render(
     // <React.StrictMode>
         <Router>
