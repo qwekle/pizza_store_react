@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from "prop-types";
-import Categories from "./Categories";
 
 const SortPopup = ({activeSortType, items, onClickSortType}) => {
     const [visiblePopup, setVisiblePopup] = useState(false);
@@ -13,8 +12,9 @@ const SortPopup = ({activeSortType, items, onClickSortType}) => {
     const toggleVisiblePopup = () => {
         setVisiblePopup(!visiblePopup)
     };
-    const handleOutsideClick = (e) => {
-        if(!e.path.includes(sortRef.current)){
+    const handleOutsideClick = (event) => {
+        const path = event.path || (event.composedPath && event.composedPath()) ;
+        if(!path.includes(sortRef.current)){
             setVisiblePopup(false);
         }
     }

@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
-import PizzaBlock from "./PizzaBlock/PizzaBlock";
 
 const Categories = ({activeCategory, items, onClickCategory}) => {
     const onSelectItem = (index) => {
@@ -13,7 +12,6 @@ const Categories = ({activeCategory, items, onClickCategory}) => {
                 {items &&
                 items.map((name, index) => <li className={activeCategory === index ? 'active' : ''}
                                               onClick={() => onClickCategory(index)} key={`${name}_${index}`}>{name}</li>)
-
                 }
             </ul>
         </div>

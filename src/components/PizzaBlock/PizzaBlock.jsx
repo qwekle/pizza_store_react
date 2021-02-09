@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import ContentLoader from "react-content-loader";
+import Button from "../Button";
 
-const PizzaBlock = ({name, price, sizes, imageUrl, types}) => {
+const PizzaBlock = ({name, price, sizes, imageUrl, types, onClickAddPizza}) => {
     const avialableTypes = ['тонкое', 'традиционное'];
     const avialableSizes = [26, 30, 40];
     const [activeType, setActiveType] = useState(types[0]);
@@ -52,7 +52,7 @@ const PizzaBlock = ({name, price, sizes, imageUrl, types}) => {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add">
+                <Button click={onClickAddPizza} className={'button--add'} outline >
                     <svg
                         width="12"
                         height="12"
@@ -65,7 +65,7 @@ const PizzaBlock = ({name, price, sizes, imageUrl, types}) => {
                     </svg>
                     <span>Добавить</span>
                     <i>2</i>
-                </div>
+                </Button>
             </div>
         </div>
     );
@@ -76,6 +76,7 @@ PizzaBlock.propTypes = {
     imageUrl: PropTypes.string,
     types: PropTypes.arrayOf(PropTypes.number).isRequired,
     sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+    onAddPizza: PropTypes.func,
 }
 PizzaBlock.defaultProps = {
     name: 'name',
