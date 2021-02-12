@@ -3,17 +3,29 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Button from "../Button";
 
-const PizzaBlock = ({name, price, sizes, imageUrl, types, onClickAddPizza}) => {
+const PizzaBlock = ({id, name, price, sizes, imageUrl, types, onClickAddPizza, addedCount}) => {
     const avialableTypes = ['тонкое', 'традиционное'];
     const avialableSizes = [26, 30, 40];
     const [activeType, setActiveType] = useState(types[0]);
-    const [activeSize, setActiveSize] = useState(sizes[0]);
+    const [activeSize, setActiveSize] = useState(0);
     const onSelectName = (index) => {
         setActiveType(index);
     };
     const onSelectSize = (index) => {
         setActiveSize(index);
     };
+    const onAddPizza = () => {
+        const obj = {
+            id,
+            name,
+            imageUrl,
+            price,
+            size: avialableSizes[activeSize],
+            type: avialableTypes[activeType]
+
+        }
+        onClickAddPizza(obj)
+    }
 
     return (
         <div className="pizza-block">
@@ -52,7 +64,7 @@ const PizzaBlock = ({name, price, sizes, imageUrl, types, onClickAddPizza}) => {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <Button click={onClickAddPizza} className={'button--add'} outline >
+                <Button click={onAddPizza} className={'button--add'} outline >
                     <svg
                         width="12"
                         height="12"
@@ -64,7 +76,7 @@ const PizzaBlock = ({name, price, sizes, imageUrl, types, onClickAddPizza}) => {
                             fill="white"/>
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
+                    {addedCount && <i>{addedCount}</i>}
                 </Button>
             </div>
         </div>
@@ -77,6 +89,7 @@ PizzaBlock.propTypes = {
     types: PropTypes.arrayOf(PropTypes.number).isRequired,
     sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
     onAddPizza: PropTypes.func,
+    addedCount: PropTypes.number,
 }
 PizzaBlock.defaultProps = {
     name: 'name',
